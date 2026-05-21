@@ -1,0 +1,74 @@
+<div class="bg-dark text-white min-vh-100 d-flex flex-column justify-content-center">
+  
+  <div class="container py-5 mt-5">
+    <div class="row align-items-center py-5 g-5">
+      
+      <div class="col-lg-5 mb-5 mb-lg-0 text-center text-lg-start">
+        <h1 class="display-4 fw-bold text-info mb-3 lh-1">
+          Tu Setup,<br> <span class="text-white">Al Siguiente Nivel</span>
+        </h1>
+        <p class="lead text-light mb-4" style="opacity: 0.85; font-size: 1.1rem;">
+          Construye el PC de tus sueños con los mejores componentes del mercado. Rendimiento extremo garantizado.
+        </p>
+        
+        <div class="d-grid gap-3 d-md-flex justify-content-center justify-content-lg-start">
+          <a routerLink="/catalogo" class="btn btn-info btn-lg px-4 fw-bold shadow-lg text-dark transition-btn">
+            <i class="bi bi-controller me-2"></i>Ver Catálogo
+          </a>
+
+          @if (!estaLogueado) {
+            <a routerLink="/registro" class="btn btn-outline-light btn-lg px-4 fw-bold transition-btn">
+              <i class="bi bi-person-plus me-2"></i>Únete Ahora
+            </a>
+          } @else {
+            <button (click)="logout()" class="btn btn-outline-danger btn-lg px-4 fw-bold shadow transition-btn">
+              <i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="col-lg-7 text-center position-relative">
+        <div class="position-absolute w-75 h-75 bg-info rounded-circle blur-effect" 
+             style="top: 10%; left: 10%; filter: blur(100px); opacity: 0.15; z-index: 0;"></div>
+        
+        <img src="https://images.pexels.com/photos/7238759/pexels-photo-7238759.jpeg?auto=compress&cs=tinysrgb&w=1200" 
+             class="img-fluid hero-floating-img rounded-4 shadow-lg border border-secondary position-relative" 
+             alt="Gaming Setup de Alto Rendimiento"
+             style="max-height: 550px; width: 100%; object-fit: cover; z-index: 1;">
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container pb-5 mt-4">
+    <div class="row g-4 text-center">
+      
+      <div class="col-md-4">
+        <div class="p-4 rounded-4 border border-secondary h-100 feature-card transition-card" style="background: rgba(255,255,255,0.03)"> 
+          <div class="fs-1 mb-3 text-info"><i class="bi bi-rocket-takeoff"></i></div>
+          <h4 class="fw-bold text-white mb-2">Envío Rápido</h4>
+          <p class="text-white-50 small mb-0">Recibe tus componentes en 24/48h en toda la península.</p>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="p-4 rounded-4 border border-secondary h-100 feature-card transition-card" style="background: rgba(255,255,255,0.03)">
+          <div class="fs-1 mb-3 text-info"><i class="bi bi-shield-check"></i></div>
+          <h4 class="fw-bold text-white mb-2">Garantía Total</h4>
+          <p class="text-white-50 small mb-0">Hasta 3 años de garantía oficial en todos nuestros productos.</p>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="p-4 rounded-4 border border-secondary h-100 feature-card transition-card" style="background: rgba(255,255,255,0.03)">
+          <div class="fs-1 mb-3 text-info"><i class="bi bi-motherboard"></i></div>
+          <h4 class="fw-bold text-white mb-2">Calidad Premium</h4>
+          <p class="text-white-50 small mb-0">Trabajamos solo con las marcas líderes del sector gaming.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

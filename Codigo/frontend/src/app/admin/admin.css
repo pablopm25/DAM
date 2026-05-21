@@ -1,0 +1,134 @@
+/* 1. Fondo general */
+:host {
+    display: block;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 2. Personalización del Scrollbar  */
+.table-responsive::-webkit-scrollbar {
+    width: 8px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: #0f172a; 
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background: #334155; 
+    border-radius: 10px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #0dcaf0;
+}
+
+/* 3. Animaciones para botones */
+.transition-btn {
+    transition: all 0.3s ease;
+}
+
+.transition-btn:hover:not([disabled]) {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+    box-shadow: 0 5px 15px rgba(13, 202, 240, 0.3);
+}
+
+.transition-btn:active {
+    transform: translateY(0);
+}
+
+/* 4. Efecto de fila seleccionada al editar */
+.table-active {
+    background-color: rgba(255, 193, 7, 0.1) !important;
+    border-left: 4px solid #ffc107;
+    transition: all 0.3s ease;
+}
+
+/* 5. Card del Formulario */
+.card {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.sticky-top {
+    transition: top 0.3s ease;
+}
+
+/* 6. Inputs */
+.form-control, .form-select {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus, .form-select:focus {
+    box-shadow: 0 0 0 0.25rem rgba(13, 202, 240, 0.15);
+    border-color: #0dcaf0;
+}
+
+/* 7. Ajuste de imágenes en la tabla */
+img {
+    transition: transform 0.2s;
+}
+
+img:hover {
+    transform: scale(2.5); 
+    z-index: 1000;
+    position: relative;
+    cursor: zoom-in;
+}
+
+/* 8. Labels con estilo minimalista */
+.text-white-50 {
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/* 9. Efecto de elevación para las Tarjetas de Estadísticas */
+.card.border-info, .card.border-warning, .card.border-success {
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.card.border-info:hover, .card.border-warning:hover, .card.border-success:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* 10. Estilos para los Estados del pedido */
+.badge {
+    padding: 0.5em 0.8em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Animación de pulso para pedidos PENDIENTES  */
+.bg-warning.text-dark {
+    animation: pulse-warning 2s infinite;
+}
+
+@keyframes pulse-warning {
+    0% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 193, 7, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
+}
+
+/* 11. Estilo para los selectores de la tabla */
+.table select.form-select-sm {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    color: #cbd5e1;
+    cursor: pointer;
+}
+
+.table select.form-select-sm:hover {
+    border-color: #0dcaf0;
+}
+
+/* 12. Separador visual para la sección de ventas */
+.card-header h5 i {
+    vertical-align: middle;
+}

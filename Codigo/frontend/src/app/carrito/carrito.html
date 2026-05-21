@@ -1,0 +1,120 @@
+<div class="container mt-5 mb-5">
+  
+  <div class="d-flex justify-content-between align-items-center mb-4 border-bottom border-secondary pb-3">
+    <h2 class="text-info text-uppercase fw-bold m-0">
+      <i class="bi bi-cart3 me-2"></i>Tu Carrito
+    </h2>
+    
+    <a routerLink="/catalogo" class="btn btn-outline-light btn-sm shadow-sm transition-btn">
+      <i class="bi bi-arrow-left me-1"></i> Seguir Comprando
+    </a>
+  </div>
+
+  @if (items.length === 0) {
+    <div class="text-center py-5 bg-dark rounded shadow-lg border border-secondary mt-4">
+      <div class="fs-1 mb-3 text-white-50">
+        <i class="bi bi-cart-x" style="font-size: 4rem;"></i>
+      </div>
+      <h3 class="text-white fw-bold">Tu carrito está vacío</h3>
+      <p class="text-white-50 mb-4">¿Aún no te has decidido por el setup de tus sueños?</p>
+      
+      <a routerLink="/catalogo" class="btn btn-info btn-lg shadow transition-btn text-dark fw-bold px-5">
+        Ir al Catálogo
+      </a>
+    </div>
+  } 
+  
+  @else {
+    <div class="row g-4">
+      
+      <div class="col-lg-8">
+        <div class="card bg-dark border-secondary shadow-lg">
+          <ul class="list-group list-group-flush rounded">
+            @for (item of items; track item.id) {
+              <li class="list-group-item bg-dark text-white border-secondary d-flex flex-column flex-md-row justify-content-between align-items-center p-3 transition-row">
+                
+                <div class="d-flex align-items-center mb-3 mb-md-0 w-100">
+                  <img [src]="item.imagenUrl || 'assets/placeholder.jpg'" 
+                       class="rounded me-3 border border-secondary bg-white" 
+                       style="width: 80px; height: 80px; object-fit: contain;"
+                       (error)="item.imagenUrl='assets/placeholder.jpg'"
+                       alt="Imagen de {{ item.nombre }}">
+                  <div>
+                    <h5 class="mb-1 fw-bold text-white">{{ item.nombre }}</h5>
+                    <small class="text-info text-uppercase" style="font-size: 0.75rem;">
+                      {{ item.categoria || 'Componente' }}
+                    </small>
+                    <div class="text-white-50 mt-1 small">
+                        {{ item.precio | currency:'EUR':'symbol':'1.2-2':'es' }} / ud.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-between w-100 w-md-auto gap-4">
+                  
+                  <div class="input-group input-group-sm" style="max-width: 130px;">
+                    <button class="btn btn-outline-info" (click)="modificarCantidad(item.id, -1)">
+                      <i class="bi bi-dash"></i>
+                    </button>
+                    <input type="text" class="form-control text-center bg-dark text-white border-info fw-bold" readonly [value]="item.cantidad">
+                    <button class="btn btn-outline-info" (click)="modificarCantidad(item.id, 1)">
+                      <i class="bi bi-plus"></i>
+                    </button>
+                  </div>
+
+                  <span class="fw-bold text-success fs-5 text-nowrap">
+                    {{ (item.precio * item.cantidad) | currency:'EUR':'symbol':'1.2-2':'es' }}
+                  </span>
+                  
+                  <button class="btn btn-outline-danger btn-sm px-3 shadow-sm" 
+                          (click)="eliminarItem(item.id)" 
+                          title="Eliminar del carrito">
+                    <i class="bi bi-trash3"></i>
+                  </button>
+                </div>
+
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card bg-dark border-info shadow-lg sticky-top" style="top: 20px;">
+          <div class="card-header border-info bg-transparent text-center py-3">
+            <h4 class="text-info mb-0 fw-bold">Resumen del Pedido</h4>
+          </div>
+          
+          <div class="card-body text-white p-4">
+            <div class="d-flex justify-content-between mb-2">
+              <span class="text-white-50">Subtotal ({{ getTotalArticulos() }} art.)</span>
+              <span class="fw-bold">{{ total | currency:'EUR':'symbol':'1.2-2':'es' }}</span>
+            </div>
+            <div class="d-flex justify-content-between mb-3">
+              <span class="text-white-50">Envío 24/48h</span>
+              <span class="text-success fw-bold"><i class="bi bi-box-seam me-1"></i> GRATIS</span>
+            </div>
+            
+            <hr class="border-secondary my-4">
+            
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <span class="fs-5 fw-bold text-uppercase">Total</span>
+              <span class="fs-2 fw-bold text-info">{{ total | currency:'EUR':'symbol':'1.2-2':'es' }}</span>
+            </div>
+            
+            <button class="btn btn-success w-100 py-3 fw-bold shadow-lg fs-5 transition-btn" 
+                    (click)="comprar()">
+              <i class="bi bi-credit-card me-2"></i> Pagar Ahora
+            </button>
+            
+            <div class="mt-4 text-center border-top border-secondary pt-3">
+                <i class="bi bi-shield-lock text-success me-1"></i>
+                <small class="text-white-50">Pago 100% Seguro y Encriptado</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  }
+</div>

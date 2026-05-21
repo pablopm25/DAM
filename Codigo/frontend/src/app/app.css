@@ -1,0 +1,48 @@
+:root {
+  --bg-dark: #0f172a;
+  --card-bg: #1e293b;
+  --neon-blue: #38bdf8;
+  --neon-green: #4ade80;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: #f1f5f9;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif; 
+}
+
+.card-gaming {
+  background-color: var(--card-bg);
+  border: 1px solid #334155;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card-gaming:hover {
+  transform: translateY(-5px);
+  border-color: var(--neon-blue);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #22c55e, #16a34a) !important;
+  border: none !important;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-success:hover, .btn-success:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(34, 197, 94, 0.3) !important;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #0ea5e9, #0284c7) !important;
+  border: none !important;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(14, 165, 233, 0.3) !important;
+}

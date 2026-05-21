@@ -1,0 +1,172 @@
+<div class="container mt-5 mb-5">
+  
+  <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom border-secondary">
+    <h2 class="text-info fw-bold text-uppercase m-0">Panel de Control Pro</h2>
+    <div class="d-flex gap-2">
+      <input type="file" #fileInput (change)="importarJson($event)" accept=".json" style="display: none;">
+      <button class="btn btn-success fw-bold shadow-sm" (click)="fileInput.click()"><i class="bi bi-upload"></i> Importar JSON</button>
+      <button class="btn btn-warning text-dark fw-bold shadow-sm" (click)="exportarCsv()"><i class="bi bi-download"></i> Exportar CSV</button>
+    </div>
+  </div>
+
+  <div class="row g-3 mb-5">
+    <div class="col-md-4">
+      <div class="card bg-dark border-info shadow-sm text-center py-3">
+        <h6 class="text-info text-uppercase small fw-bold">Ingresos Totales</h6>
+        <h2 class="text-white fw-bold m-0">{{ stats.ingresos | currency:'EUR' }}</h2>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-dark border-warning shadow-sm text-center py-3">
+        <h6 class="text-warning text-uppercase small fw-bold">Pedidos Pendientes</h6>
+        <h2 class="text-white fw-bold m-0">{{ stats.pendientes }}</h2>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-dark border-success shadow-sm text-center py-3">
+        <h6 class="text-success text-uppercase small fw-bold">Ventas Totales</h6>
+        <h2 class="text-white fw-bold m-0">{{ stats.totalVentas }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4 mb-5">
+    <div class="col-lg-4">
+      <div class="card bg-dark text-white border-secondary shadow-lg">
+        <div class="card-header fw-bold text-center py-3" [ngClass]="idEditando ? 'bg-warning text-dark' : 'bg-info text-dark'">
+          <h5 class="mb-0 fw-bold">{{ idEditando ? 'EDITANDO PRODUCTO' : 'NUEVO PRODUCTO' }}</h5>
+        </div>
+        <div class="card-body p-4">
+          <form #prodForm="ngForm" (ngSubmit)="guardar()">
+            <div class="mb-3">
+              <label class="form-label text-white-50 small">Nombre</label>
+              <input type="text" class="form-control bg-dark text-white border-secondary" [(ngModel)]="productoForm.nombre" name="nombre" required>
+            </div>
+            
+            <div class="mb-3">
+              <label for="descripcion" class="form-label text-white-50 small">Descripción</label>
+              <textarea class="form-control bg-dark text-white border-secondary" [(ngModel)]="productoForm.descripcion" name="descripcion" id="descripcion" rows="3" placeholder="Añade una descripción detallada del componente..."></textarea>
+            </div>
+            
+            <div class="row">
+              <div class="col-6 mb-3"><label class="small text-white-50">Precio (€)</label><input type="number" class="form-control bg-dark text-white border-secondary" [(ngModel)]="productoForm.precio" name="precio" required></div>
+              <div class="col-6 mb-3"><label class="small text-white-50">Stock</label><input type="number" class="form-control bg-dark text-white border-secondary" [(ngModel)]="productoForm.stock" name="stock" required></div>
+            </div>
+            <div class="mb-3">
+              <label class="small text-white-50">Categoría</label>
+              <select class="form-select bg-dark text-white border-secondary" [(ngModel)]="productoForm.categoria" name="categoria">
+                <option value="Procesadores">Procesadores</option>
+                <option value="Tarjetas Gráficas">Tarjetas Gráficas</option>
+                <option value="Memoria RAM">Memoria RAM</option>
+                <option value="Placas Base">Placas Base</option>
+                <option value="Almacenamiento">Almacenamiento</option>
+              </select>
+            </div>
+
+            <div class="mb-4">
+              <label class="small text-white-50">URL de la Imagen</label>
+              <input type="text" class="form-control bg-dark text-white border-secondary mb-2" [(ngModel)]="productoForm.imagenUrl" name="imagenUrl" placeholder="https://ejemplo.com/foto.png">
+              
+              @if (productoForm.imagenUrl) {
+                <div class="text-center p-2 border border-secondary rounded bg-dark">
+                  <p class="text-white-50 mb-1" style="font-size: 0.75rem;">Vista previa</p>
+                  <img [src]="productoForm.imagenUrl" alt="Previsualización" class="img-fluid rounded" style="max-height: 120px; object-fit: contain;">
+                </div>
+              }
+            </div>
+            <button type="submit" class="btn w-100 fw-bold py-2 shadow" [ngClass]="idEditando ? 'btn-warning text-dark' : 'btn-info text-dark'" [disabled]="prodForm.invalid">
+              <i class="bi bi-save"></i> {{ idEditando ? 'ACTUALIZAR' : 'CREAR' }}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <div class="card bg-dark border-secondary shadow">
+        <div class="card-header border-secondary bg-transparent text-white fw-bold">Inventario Actual</div>
+        <div class="table-responsive" style="max-height: 400px;">
+          <table class="table table-dark table-hover mb-0 align-middle">
+            <thead class="sticky-top bg-dark text-info">
+              <tr><th>Producto</th><th>Precio</th><th>Stock</th><th class="text-end">Acciones</th></tr>
+            </thead>
+            <tbody>
+              @for (p of productos; track p.id) {
+                <tr>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      @if (p.imagenUrl) {
+                        <img [src]="p.imagenUrl" class="rounded me-2 bg-white" style="width: 40px; height: 40px; object-fit: contain;">
+                      }
+                      <div>
+                        <div class="fw-bold">{{p.nombre}}</div>
+                        <small class="text-white-50">{{p.categoria}}</small>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="text-info fw-bold">{{p.precio | currency:'EUR'}}</td>
+                  <td><span class="badge" [ngClass]="p.stock < 5 ? 'bg-danger' : 'bg-success'">{{p.stock}}</span></td>
+                  <td class="text-end">
+                    <button class="btn btn-sm btn-outline-info me-1" (click)="editar(p)"><i class="bi bi-pencil"></i></button>
+                    <button class="btn btn-sm btn-outline-danger" (click)="eliminar(p.id!)" title="Eliminar">
+                      <i class="bi bi-x-lg"></i>
+                    </button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card bg-dark border-secondary shadow">
+    <div class="card-header border-secondary bg-transparent d-flex justify-content-between align-items-center py-3">
+      <h5 class="text-white fw-bold m-0"><i class="bi bi-cart-check text-success me-2"></i>Gestión de Ventas Realizadas</h5>
+      <input type="text" class="form-control form-control-sm w-25 bg-dark text-white border-secondary" 
+             placeholder="Filtrar por Cliente o ID..." [(ngModel)]="filtroPedido" (input)="filtrarPedidos()">
+    </div>
+    <div class="table-responsive">
+      <table class="table table-dark table-hover mb-0 align-middle">
+        <thead class="table-secondary text-uppercase small text-dark">
+          <tr>
+            <th>ID Pedido</th>
+            <th>Cliente</th>
+            <th>Fecha</th>
+            <th>Total</th>
+            <th>Estado</th>
+            <th class="text-center">Cambiar Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (pedido of pedidosFiltrados; track pedido.id) {
+            <tr>
+              <td class="fw-bold text-info">#{{pedido.id}}</td>
+              <td>{{pedido.usuario.nombre}} <br> <small class="text-white-50">{{pedido.usuario.email}}</small></td>
+              <td>{{pedido.fecha | date:'short'}}</td>
+              <td class="fw-bold text-success">{{pedido.total | currency:'EUR'}}</td>
+              <td>
+                <span class="badge" [ngClass]="{
+                  'bg-warning text-dark': pedido.estado === 'PENDIENTE',
+                  'bg-info text-dark': pedido.estado === 'ENVIADO',
+                  'bg-success': pedido.estado === 'COMPLETADO',
+                  'bg-danger': pedido.estado === 'CANCELADO'
+                }">{{pedido.estado}}</span>
+              </td>
+              <td class="text-center">
+                <select class="form-select form-select-sm bg-dark text-white border-secondary" 
+                        [ngModel]="pedido.estado" (ngModelChange)="actualizarEstadoPedido(pedido, $event)">
+                  <option value="PENDIENTE">PENDIENTE</option>
+                  <option value="ENVIADO">ENVIADO</option>
+                  <option value="COMPLETADO">COMPLETADO</option>
+                  <option value="CANCELADO">CANCELADO</option>
+                </select>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

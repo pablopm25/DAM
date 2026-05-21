@@ -1,0 +1,81 @@
+:host {
+    display: block;
+    padding-top: 2rem;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 1. Efecto de la Tarjeta Principal */
+.card {
+    border-radius: 16px;
+    background-color: #0f172a !important; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* 2. Avatar e Icono */
+.bi-person-circle {
+    filter: drop-shadow(0 0 10px rgba(13, 202, 240, 0.3));
+}
+
+/* 3. El Contenedor del Saldo */
+.bg-black.bg-opacity-25 {
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.text-success {
+    text-shadow: 0 0 15px rgba(25, 135, 84, 0.4);
+}
+
+/* 4. Botones de Recarga Rápida */
+.btn-outline-success {
+    border-width: 2px;
+    border-color: rgba(25, 135, 84, 0.5);
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-outline-success:hover {
+    transform: translateY(-3px);
+    background-color: #198754;
+    color: white !important;
+    box-shadow: 0 5px 15px rgba(25, 135, 84, 0.3);
+}
+
+.btn-outline-success:active {
+    transform: translateY(0);
+}
+
+/* 5. Etiquetas */
+.text-white-50 {
+    letter-spacing: 1px;
+    font-size: 0.75rem;
+}
+
+/* 6. Badge de Rol */
+.badge {
+    padding: 0.5em 1em;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* 7. Animación de entrada */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeInUp 0.5s ease-out;
+}

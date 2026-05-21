@@ -1,0 +1,110 @@
+<div class="container mt-4 mb-5">
+  
+  <div class="text-center mb-5 mt-3">
+    <h1 class="fw-bold text-info text-uppercase mb-2">
+      <i class="bi bi-cpu me-2"></i>Catálogo de Componentes
+    </h1>
+    <p class="text-white-50">Equipa tu setup con la mejor tecnología del mercado.</p>
+  </div>
+
+  <div class="row justify-content-center mb-4 g-3">
+    <div class="col-md-6 col-lg-5">
+      <div class="input-group shadow-sm">
+        <span class="input-group-text bg-dark border-info text-info">
+          <i class="bi bi-search"></i>
+        </span>
+        <input type="text" class="form-control bg-dark text-white border-info focus-glow" 
+               placeholder="Busca RTX 4090, Ryzen 7..."
+               [(ngModel)]="terminoBusqueda" (input)="filtrarPorBusqueda()">
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center flex-wrap gap-2 mb-5">
+    <button class="btn btn-sm px-4 fw-bold transition-btn" 
+            [ngClass]="categoriaActiva === 'TODOS' ? 'btn-info text-dark' : 'btn-outline-light'"
+            (click)="filtrar('TODOS')">Todo</button>
+    <button class="btn btn-sm px-3 transition-btn" 
+            [ngClass]="categoriaActiva === 'Gráficas' ? 'btn-info text-dark' : 'btn-outline-info'"
+            (click)="filtrar('Gráficas')">Gráficas</button>
+    <button class="btn btn-sm px-3 transition-btn" 
+            [ngClass]="categoriaActiva === 'Procesadores' ? 'btn-info text-dark' : 'btn-outline-info'"
+            (click)="filtrar('Procesadores')">Procesadores</button>
+    <button class="btn btn-sm px-3 transition-btn" 
+            [ngClass]="categoriaActiva === 'RAM' ? 'btn-info text-dark' : 'btn-outline-info'"
+            (click)="filtrar('RAM')">RAM</button>
+    <button class="btn btn-sm px-3 transition-btn" 
+            [ngClass]="categoriaActiva === 'Placas Base' ? 'btn-info text-dark' : 'btn-outline-info'"
+            (click)="filtrar('Placas Base')">Placas Base</button>
+    <button class="btn btn-sm px-3 transition-btn" 
+            [ngClass]="categoriaActiva === 'SSD' ? 'btn-info text-dark' : 'btn-outline-info'"
+            (click)="filtrar('SSD')">SSD</button>
+  </div>
+
+  <div class="row g-4">
+    @for (p of productosFiltrados; track p.id) {
+      <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="card bg-dark text-white border-secondary h-100 shadow-lg feature-card transition-card">
+          
+          <div class="overflow-hidden position-relative bg-white d-flex align-items-center justify-content-center" style="border-radius: 12px 12px 0 0; height: 220px; padding: 1rem;">
+            <img [src]="p.imagenUrl || 'assets/placeholder.jpg'" 
+                 class="card-img-top product-img" 
+                 style="max-height: 100%; max-width: 100%; object-fit: contain;"
+                 alt="{{p.nombre}}"
+                 (error)="p.imagenUrl='assets/placeholder.jpg'">
+             
+             @if (p.stock > 0 && p.stock < 5) {
+                <span class="position-absolute top-0 end-0 badge bg-warning text-dark m-2 shadow px-2 py-1 pulse-warning">
+                  <i class="bi bi-fire text-danger"></i> ¡Solo quedan {{p.stock}}!
+                </span>
+             }
+             
+             @if (p.stock <= 0 || !p.stock) {
+                <div class="position-absolute w-100 h-100 d-flex align-items-center justify-content-center" style="background: rgba(0,0,0,0.6); top:0; left:0;">
+                    <span class="badge bg-danger fs-5 px-4 py-2 border border-light shadow">AGOTADO</span>
+                </div>
+             }
+          </div>
+
+          <div class="card-body d-flex flex-column p-4">
+            <small class="text-white-50 text-uppercase mb-1" style="font-size: 0.7rem; letter-spacing: 1px;">
+                {{ p.categoria }}
+            </small>
+            <h5 class="fw-bold text-white mb-2 product-title">{{ p.nombre }}</h5>
+            
+            <p class="small text-white-50 flex-grow-1" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+              {{ p.descripcion }}
+            </p>
+            
+            <div class="d-flex justify-content-between align-items-end mt-3 pt-3 border-top border-secondary">
+              <span class="fs-4 fw-bold text-success lh-1">
+                  {{ p.precio | currency:'EUR':'symbol':'1.2-2':'es' }}
+              </span>
+              
+              @if (p.stock > 0) {
+                <button class="btn btn-info btn-sm fw-bold shadow transition-btn px-3" 
+                        (click)="agregar(p)">
+                   <i class="bi bi-cart-plus fs-6 text-dark"></i>
+                </button>
+              }
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    }
+  </div>
+
+  @if (productosFiltrados.length === 0) {
+    <div class="text-center mt-5 py-5 bg-dark rounded border border-secondary shadow-lg">
+      <div class="text-white-50 mb-3">
+          <i class="bi bi-search" style="font-size: 3rem;"></i>
+      </div>
+      <h4 class="text-white fw-bold">No se encontraron componentes</h4>
+      <p class="text-white-50">Intenta buscar con otros términos o selecciona "Todo" en las categorías.</p>
+      <button class="btn btn-outline-info mt-2" (click)="filtrar('TODOS'); terminoBusqueda=''">
+          Limpiar Búsqueda
+      </button>
+    </div>
+  }
+</div>

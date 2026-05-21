@@ -1,0 +1,124 @@
+/* 1. Suavizado de fuentes */
+:host {
+    display: block;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 2. Tarjeta Sólida Mate */
+.card {
+    background-color: #1e293b !important; 
+    border: 1px solid #334155 !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* 3. Botón Neón */
+.btn-success {
+    background-color: #10b981 !important; 
+    border: none !important;
+    color: white !important;
+    border-radius: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-info {
+    background-color: #0ea5e9 !important;
+    border: none !important;
+    color: white !important;
+    border-radius: 8px; 
+    font-weight: 700;
+    text-transform: uppercase; 
+    letter-spacing: 0.5px;
+}
+
+/* 4. Inputs de Alto Contraste */
+.form-control, .input-group-text {
+    background-color: #0f172a !important; 
+    border: 1px solid #475569 !important;
+    color: #f8fafc !important;
+    transition: all 0.3s ease;
+}
+
+.input-group-text {
+    color: #38bdf8 !important; 
+}
+
+.focus-glow:focus {
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25) !important; 
+    border-color: #38bdf8 !important;
+    outline: none;
+}
+
+.text-white-50 {
+    color: #94a3b8 !important; 
+}
+
+.card-body {
+    padding: 3rem !important; 
+}
+
+/* 5. Animaciones universales para Botones y Enlaces */
+.transition-btn {
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+}
+
+.transition-btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3) !important;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* 6. Animación de advertencia para el aviso del @gmail.com */
+@keyframes pulse-warning {
+    0% { opacity: 0.7; transform: translateX(0); }
+    50% { opacity: 1; transform: translateX(3px); }
+    100% { opacity: 0.7; transform: translateX(0); }
+}
+
+.pulse-warning {
+    animation: pulse-warning 2s infinite ease-in-out;
+    color: #fbbf24 !important;
+}
+
+/* 7. Rediseño de iconos centrales */
+
+.icon-wrapper {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1.5rem auto;
+    
+    background: linear-gradient(145deg, #1e293b, #0f172a);
+    border: 2px solid #0ea5e9;
+    border-radius: 50%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    box-shadow: 
+        0 0 20px rgba(14, 165, 233, 0.4),    
+        inset 0 0 15px rgba(14, 165, 233, 0.2); 
+        
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.icon-wrapper:hover {
+    transform: scale(1.05);
+    box-shadow: 
+        0 0 30px rgba(14, 165, 233, 0.6),    
+        inset 0 0 20px rgba(14, 165, 233, 0.4);
+}
+
+.icon-wrapper i {
+    font-size: 3rem;
+    color: #38bdf8;
+    filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.8));
+}

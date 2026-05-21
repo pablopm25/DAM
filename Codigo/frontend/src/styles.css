@@ -1,0 +1,96 @@
+@import 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css';
+
+:root {
+  --fondo-principal: #0f172a; 
+  --fondo-tarjeta: #1e293b;   
+  --color-texto: #e2e8f0;     
+  --neon-azul: #38bdf8;       
+  --neon-rojo: #ef4444;       
+  --neon-verde: #22c55e;      
+}
+
+body {
+  background-color: var(--fondo-principal);
+  color: var(--color-texto);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.1rem; 
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--fondo-principal);
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-azul);
+}
+
+.card {
+  background-color: var(--fondo-tarjeta) !important;
+  border: 1px solid #334155 !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px); 
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), 
+              0 0 15px rgba(56, 189, 248, 0.3); 
+  border-color: var(--neon-azul) !important;
+}
+
+.form-control, .form-select {
+  background-color: #0f172a !important;
+  border: 1px solid #334155 !important;
+  color: white !important;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.form-control:focus, .form-select:focus {
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.5) !important;
+  border-color: var(--neon-azul) !important;
+}
+
+.btn-primary {
+  background-color: var(--neon-azul);
+  border: none;
+  color: #000;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+.btn-primary:hover {
+  background-color: #0ea5e9;
+  box-shadow: 0 0 15px var(--neon-azul); 
+}
+
+.btn-danger {
+  background-color: var(--neon-rojo);
+  border: none;
+  color: white;
+  transition: all 0.3s ease;
+}
+.btn-danger:hover {
+  background-color: #dc2626;
+  box-shadow: 0 0 15px var(--neon-rojo);
+}
+
+.navbar {
+  background-color: rgba(15, 23, 42, 0.95) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); 
+}
+
+.table-dark {
+  --bs-table-bg: var(--fondo-tarjeta);
+  border-color: #334155;
+}
+
+div:where(.swal2-container) div:where(.swal2-popup) {
+  background: var(--fondo-tarjeta) !important;
+  border: 1px solid #334155 !important;
+}

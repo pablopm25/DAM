@@ -1,0 +1,138 @@
+<div class="container mt-5 mb-5">
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-7 col-lg-5">
+      
+      <div class="card shadow-lg position-relative" style="border-radius: 16px;">
+        
+        <div class="card-header border-secondary text-center py-4 bg-transparent">
+          <div class="icon-wrapper">
+            <i class="bi bi-person-lines-fill"></i>
+          </div>
+          <h3 class="mb-0 fw-bold text-info text-uppercase" style="letter-spacing: 1px;">Crear Cuenta</h3>
+        </div>
+        
+        <div class="card-body">
+          <form (ngSubmit)="registrar()" #registroFormRef="ngForm">
+            
+            <div class="mb-3">
+              <label for="regNombre" class="form-label text-white-50 small text-uppercase fw-bold">Nombre Completo</label>
+              <div class="input-group shadow-sm">
+                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                <input type="text" 
+                       id="regNombre"
+                       class="form-control p-2 focus-glow" 
+                       placeholder="Ej: Pablo Alumno"
+                       name="nombre"
+                       autocomplete="name"
+                       [(ngModel)]="nuevoUsuario.nombre" 
+                       required>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="regUsername" class="form-label text-white-50 small text-uppercase fw-bold">Usuario (Nick)</label>
+              <div class="input-group shadow-sm">
+                <span class="input-group-text"><i class="bi bi-at"></i></span>
+                <input type="text" 
+                       id="regUsername"
+                       class="form-control p-2 focus-glow" 
+                       placeholder="Ej: pablo123"
+                       name="username"
+                       autocomplete="username"
+                       [(ngModel)]="nuevoUsuario.username" 
+                       required>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="regEmail" class="form-label text-white-50 small text-uppercase fw-bold">Correo Electrónico</label>
+              <div class="input-group shadow-sm">
+                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                <input type="email" 
+                       id="regEmail"
+                       class="form-control p-2 focus-glow" 
+                       placeholder="ejemplo@gmail.com"
+                       name="email"
+                       autocomplete="email"
+                       [(ngModel)]="nuevoUsuario.email" 
+                       required>
+              </div>
+              @if (nuevoUsuario.email.length > 0 && !nuevoUsuario.email.endsWith('@gmail.com')) {
+                <div class="text-warning small mt-2 fw-bold pulse-warning">
+                   <i class="bi bi-exclamation-triangle-fill me-1"></i> Solo aceptamos correos de @gmail.com
+                </div>
+              }
+            </div>
+
+            <div class="mb-3">
+              <label for="regDireccion" class="form-label text-white-50 small text-uppercase fw-bold">Dirección de Envío</label>
+              <div class="input-group shadow-sm">
+                <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
+                <input type="text" 
+                       id="regDireccion"
+                       class="form-control p-2 focus-glow" 
+                       placeholder="Calle, Ciudad, Código Postal..."
+                       name="direccion"
+                       [(ngModel)]="nuevoUsuario.direccion" 
+                       required>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="regPassword" class="form-label text-white-50 small text-uppercase fw-bold">Contraseña</label>
+              <div class="input-group shadow-sm">
+                <span class="input-group-text"><i class="bi bi-key"></i></span>
+                <input [type]="verPassword ? 'text' : 'password'" 
+                       id="regPassword"
+                       class="form-control p-2 focus-glow" 
+                       placeholder="••••••••"
+                       name="password"
+                       autocomplete="new-password"
+                       [(ngModel)]="nuevoUsuario.password" 
+                       required>
+                <button type="button" class="btn btn-outline-secondary border-secondary text-white-50" (click)="togglePassword()">
+                  <i class="bi" [ngClass]="verPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label for="regConfirmPassword" class="form-label text-white-50 small text-uppercase fw-bold">Repetir Contraseña</label>
+              <div class="input-group shadow-sm">
+                <span class="input-group-text"><i class="bi bi-shield-lock"></i></span>
+                <input [type]="verPassword ? 'text' : 'password'" 
+                       id="regConfirmPassword"
+                       class="form-control p-2 focus-glow" 
+                       placeholder="••••••••"
+                       name="confirmarPassword"
+                       autocomplete="new-password"
+                       [(ngModel)]="confirmarPassword" 
+                       required>
+              </div>
+              @if (confirmarPassword.length > 0 && nuevoUsuario.password !== confirmarPassword) {
+                <div class="text-danger small mt-2 fw-bold">
+                   <i class="bi bi-x-circle-fill me-1"></i> Las contraseñas no coinciden
+                </div>
+              }
+            </div>
+
+            <button type="submit" 
+                    class="btn btn-success w-100 fw-bold py-3 shadow-lg transition-btn"
+                    [disabled]="!registroFormRef.form.valid || !nuevoUsuario.email.endsWith('@gmail.com') || nuevoUsuario.password !== confirmarPassword">
+              <i class="bi bi-person-plus-fill me-2"></i> Crear mi cuenta
+            </button>
+
+          </form>
+        </div>
+        
+        <div class="card-footer bg-transparent border-secondary text-center py-4">
+          <span class="text-white-50">¿Ya tienes cuenta?</span>
+          <a routerLink="/login" class="text-info text-decoration-none fw-bold ms-1 transition-btn d-inline-block">
+            Inicia sesión aquí
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

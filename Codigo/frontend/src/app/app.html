@@ -1,0 +1,91 @@
+<nav class="navbar navbar-expand-lg navbar-dark shadow-lg border-bottom border-secondary fixed-top" 
+     style="background-color: rgba(15, 23, 42, 0.85) !important; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);">
+  <div class="container">
+    
+    <a class="navbar-brand fw-bold text-uppercase text-info transition-btn d-flex align-items-center" routerLink="/">
+      <i class="bi bi-cpu-fill fs-3 me-2"></i>
+      <span style="letter-spacing: 1px;">Componentes 360</span>
+    </a>
+    
+    <button class="navbar-toggler border-info text-info" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <div class="ms-auto d-flex gap-3 align-items-center flex-wrap py-2">
+
+        <a routerLink="/catalogo" class="btn btn-outline-light btn-sm fw-bold transition-btn">
+          <i class="bi bi-grid-fill me-1"></i>Catálogo
+        </a>
+
+        @if (usuarioSesion) {
+
+          <!-- Vista Administrador -->
+          @if (usuarioSesion.rol === 'ADMIN') {
+            <a routerLink="/admin" class="btn btn-danger btn-sm shadow fw-bold transition-btn">
+              <i class="bi bi-shield-lock-fill me-1"></i>Panel de Control
+            </a>
+          } 
+          
+          <!-- Vista Cliente -->
+          @else {
+            <div class="d-none d-lg-flex px-3 py-1 rounded-pill border border-secondary small align-items-center" style="background: rgba(0,0,0,0.3);">
+              <i class="bi bi-wallet2 text-white-50 me-2"></i>
+              <span class="text-white-50 fw-bold me-1">SALDO:</span>
+              <span class="fw-bold text-success">{{ usuarioSesion.saldo | currency:'EUR':'symbol':'1.2-2':'es' }}</span>
+            </div>
+
+            <a routerLink="/carrito" class="btn btn-info btn-sm position-relative fw-bold text-dark shadow-sm transition-btn">
+              <i class="bi bi-cart-fill me-1"></i>Carrito
+              @if (cantidadCarrito > 0) {
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger pulse-warning border border-dark">
+                  {{ cantidadCarrito }}
+                </span>
+              }
+            </a>
+
+            <a routerLink="/mis-pedidos" class="btn btn-outline-info btn-sm transition-btn">
+              <i class="bi bi-box-seam me-1"></i>Pedidos
+            </a>
+          }
+
+          <!-- Acciones de Cuenta -->
+          <div class="d-flex gap-2 ms-lg-2">
+            <a routerLink="/perfil" class="btn btn-outline-light btn-sm transition-btn" title="Mi Perfil">
+              <i class="bi bi-person-circle"></i>
+            </a>
+            <button (click)="logout()" class="btn btn-outline-danger btn-sm transition-btn" title="Cerrar Sesión">
+              <i class="bi bi-box-arrow-right"></i>
+            </button>
+          </div>
+
+        } @else { 
+          <div class="btn-group shadow-sm" role="group">
+            <a routerLink="/login" class="btn btn-outline-light btn-sm transition-btn">
+              <i class="bi bi-box-arrow-in-right me-1"></i>Entrar
+            </a>
+            <a routerLink="/registro" class="btn btn-info btn-sm fw-bold text-dark transition-btn">
+              <i class="bi bi-person-plus-fill me-1"></i>Registro
+            </a>
+          </div>
+        }
+
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Contenedor Principal -->
+<div style="margin-top: 85px; min-height: 80vh; padding-bottom: 2rem;">
+  <router-outlet></router-outlet>
+</div>
+
+<!-- Footer -->
+<footer class="text-white-50 text-center py-4 border-top border-secondary mt-auto" style="background-color: #0f172a;">
+  <div class="container small d-flex flex-column align-items-center">
+    <div class="mb-2">
+      <i class="bi bi-cpu fs-4 text-info opacity-50"></i>
+    </div>
+    <span>&copy; 2026 Componentes 360 - Proyecto de Pablo</span>
+  </div>
+</footer>

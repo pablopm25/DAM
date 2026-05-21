@@ -1,0 +1,74 @@
+/* 1. Suavizado de fuentes Premium */
+:host {
+    display: block;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 2. Barra de búsqueda */
+.focus-glow {
+    transition: all 0.3s ease-in-out;
+}
+
+.focus-glow:focus {
+    box-shadow: 0 0 15px rgba(13, 202, 240, 0.3) !important;
+    border-color: #0dcaf0 !important;
+}
+
+/* 3. Animaciones universales para Botones */
+.transition-btn {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.transition-btn:hover {
+    transform: translateY(-2px);
+}
+
+.transition-btn:active {
+    transform: translateY(1px);
+}
+
+/* 4. Efecto de Elevación en las Tarjetas de Producto */
+.transition-card {
+    border-radius: 12px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+}
+
+.transition-card:hover {
+    transform: translateY(-8px); 
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(13, 202, 240, 0.1) !important;
+    border-color: #0dcaf0 !important; 
+    z-index: 10; 
+}
+
+/* 5. Efecto Zoom en las Imágenes */
+.product-img {
+    transition: transform 0.5s ease;
+}
+
+.transition-card:hover .product-img {
+    transform: scale(1.08); 
+}
+
+/* 6. Animación de para el stock bajo */
+@keyframes pulse-warning {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7); }
+    50% { transform: scale(1.05); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 193, 7, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
+}
+
+.pulse-warning {
+    animation: pulse-warning 2.5s infinite;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+/* 7. Detalles del título */
+.product-title {
+    transition: color 0.3s ease;
+}
+
+.transition-card:hover .product-title {
+    color: #0dcaf0 !important; 
+}

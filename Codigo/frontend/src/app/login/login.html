@@ -1,0 +1,75 @@
+<div class="container mt-5 mb-5">
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-6 col-lg-4">
+      
+      <div class="card shadow-lg position-relative" style="border-radius: 16px;">
+        
+        <div class="card-header border-secondary text-center py-4 bg-transparent">
+          <div class="icon-wrapper">
+            <i class="bi bi-person-lock"></i>
+          </div>
+          <h3 class="mb-0 fw-bold text-info text-uppercase letter-spacing-1">Iniciar Sesión</h3>
+        </div>
+        
+        <div class="card-body">
+          <form (ngSubmit)="login()" #loginFormRef="ngForm">
+            
+            <div class="mb-4">
+              <label for="emailInput" class="form-label text-white-50 small text-uppercase fw-bold">Correo Electrónico</label>
+              <div class="input-group shadow-sm">
+                <span class="input-group-text">
+                  <i class="bi bi-envelope"></i>
+                </span>
+                <input type="email" 
+                       id="emailInput"
+                       class="form-control p-2 focus-glow" 
+                       placeholder="usuario@componentes360.com"
+                       name="email"
+                       autocomplete="email"
+                       [(ngModel)]="loginForm.email" 
+                       required>
+              </div>
+            </div>
+
+            <div class="mb-5">
+              <label for="passwordInput" class="form-label text-white-50 small text-uppercase fw-bold">Contraseña</label>
+              <div class="input-group shadow-sm">
+                <span class="input-group-text">
+                  <i class="bi bi-key"></i>
+                </span>
+                <input [type]="verPassword ? 'text' : 'password'" 
+                       id="passwordInput"
+                       class="form-control p-2 focus-glow" 
+                       placeholder="••••••••"
+                       name="password"
+                       autocomplete="current-password"
+                       [(ngModel)]="loginForm.password" 
+                       required>
+                <button type="button" 
+                        class="btn btn-outline-secondary border-secondary text-white-50" 
+                        (click)="togglePassword()">
+                  <i class="bi" [ngClass]="verPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+                </button>
+              </div>
+            </div>
+
+            <button type="submit" 
+                    class="btn btn-info w-100 fw-bold py-3 shadow-lg text-white transition-btn"
+                    [disabled]="!loginFormRef.form.valid">
+              <i class="bi bi-box-arrow-in-right me-2"></i>Entrar al Sistema
+            </button>
+
+          </form>
+        </div>
+        
+        <div class="card-footer bg-transparent border-secondary text-center py-4">
+          <span class="text-white-50">¿No tienes cuenta?</span>
+          <a routerLink="/registro" class="text-info text-decoration-none fw-bold ms-1 transition-btn d-inline-block">
+            Regístrate aquí
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
